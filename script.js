@@ -87,6 +87,46 @@
     }
   }
 
+  // Generate pixel-art tree sprites with wind-sway animation
+  function generateTrees() {
+    var backContainer = document.querySelector('.trees-back');
+    var frontContainer = document.querySelector('.trees-front');
+
+    var srcs = ['tree1.png', 'tree2.png'];
+
+    // Back trees — smaller, dimmer, packed tighter
+    if (backContainer) {
+      for (var i = 0; i < 11; i++) {
+        var tb = document.createElement('img');
+        tb.src = srcs[i % 2];
+        tb.className = 'tree-sprite';
+        tb.alt = '';
+        tb.style.left = (i * 9.5 + (Math.random() * 4 - 2)) + '%';
+        tb.style.height = (11 + Math.random() * 5) + 'vh';
+        tb.style.opacity = String(0.35 + Math.random() * 0.25);
+        tb.style.setProperty('--sway-speed', (3.5 + Math.random() * 3) + 's');
+        tb.style.setProperty('--sway-delay', '-' + (Math.random() * 4) + 's');
+        backContainer.appendChild(tb);
+      }
+    }
+
+    // Front trees — bigger, more opaque, spaced wider
+    if (frontContainer) {
+      for (var j = 0; j < 9; j++) {
+        var tf = document.createElement('img');
+        tf.src = srcs[j % 2];
+        tf.className = 'tree-sprite';
+        tf.alt = '';
+        tf.style.left = (j * 12 + (Math.random() * 5 - 2)) + '%';
+        tf.style.height = (20 + Math.random() * 8) + 'vh';
+        tf.style.opacity = String(0.75 + Math.random() * 0.25);
+        tf.style.setProperty('--sway-speed', (4 + Math.random() * 2.5) + 's');
+        tf.style.setProperty('--sway-delay', '-' + (Math.random() * 5) + 's');
+        frontContainer.appendChild(tf);
+      }
+    }
+  }
+
   // Scroll reveal animation
   function setupReveal() {
     const reveals = document.querySelectorAll('.reveal');
@@ -176,6 +216,7 @@
     generateClouds();
     generateRain();
     generateFireflies();
+    generateTrees();
     setupReveal();
     setupMobileMenu();
     setupLoader();

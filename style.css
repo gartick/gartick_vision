@@ -230,42 +230,42 @@ body {
   100% { background-position: 800px 0; }
 }
 
-/* Parallax — Distant trees */
+/* Distant trees layer */
 .trees-back {
   position: absolute;
-  bottom: 15vh;
+  bottom: 12vh;
   left: 0;
   width: 100%;
-  height: 22vh;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 100' preserveAspectRatio='xMidYMax slice'><g fill='%230a1f18'><rect x='10' y='30' width='20' height='70'/><rect x='5' y='25' width='30' height='15'/><rect x='8' y='18' width='24' height='10'/><rect x='50' y='40' width='16' height='60'/><rect x='46' y='35' width='24' height='12'/><rect x='85' y='25' width='22' height='75'/><rect x='80' y='20' width='32' height='14'/><rect x='130' y='35' width='18' height='65'/><rect x='125' y='30' width='28' height='14'/><rect x='170' y='22' width='24' height='78'/><rect x='165' y='18' width='34' height='14'/><rect x='215' y='38' width='16' height='62'/><rect x='210' y='32' width='26' height='14'/><rect x='250' y='28' width='22' height='72'/><rect x='245' y='22' width='32' height='14'/></g></svg>");
-  background-repeat: repeat-x;
-  background-size: 600px 100%;
-  opacity: 0.7;
-  animation: parallax-mid 80s linear infinite;
+  height: 24vh;
 }
 
-@keyframes parallax-mid {
-  0% { background-position: 0 0; }
-  100% { background-position: 600px 0; }
-}
-
-/* Parallax — Foreground trees */
+/* Foreground trees layer */
 .trees-front {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 20vh;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' preserveAspectRatio='xMidYMax slice'><g><rect x='0' y='0' width='400' height='100' fill='%23020609'/><g fill='%231e4a38'><rect x='20' y='20' width='32' height='80'/><rect x='12' y='12' width='48' height='20'/><rect x='16' y='6' width='40' height='10'/><rect x='24' y='0' width='24' height='8'/></g><g fill='%230f2820'><rect x='28' y='20' width='4' height='80'/></g><g fill='%23254d3a'><rect x='80' y='30' width='28' height='70'/><rect x='74' y='22' width='40' height='14'/><rect x='78' y='14' width='32' height='10'/></g><g fill='%231e4a38'><rect x='140' y='15' width='36' height='85'/><rect x='130' y='8' width='56' height='16'/><rect x='136' y='0' width='44' height='10'/></g><g fill='%23254d3a'><rect x='200' y='28' width='26' height='72'/><rect x='194' y='20' width='38' height='12'/></g><g fill='%231e4a38'><rect x='250' y='18' width='34' height='82'/><rect x='240' y='10' width='54' height='14'/><rect x='246' y='2' width='42' height='10'/></g><g fill='%23254d3a'><rect x='310' y='32' width='24' height='68'/><rect x='304' y='24' width='36' height='12'/></g><g fill='%231e4a38'><rect x='360' y='22' width='30' height='78'/><rect x='352' y='14' width='46' height='14'/></g></g></svg>");
-  background-repeat: repeat-x;
-  background-size: 400px 100%;
-  opacity: 1;
-  animation: parallax-fast 40s linear infinite;
+  height: 32vh;
 }
 
-@keyframes parallax-fast {
-  0% { background-position: 0 0; }
-  100% { background-position: 400px 0; }
+/* Individual tree sprites (injected by JS) */
+.tree-sprite {
+  position: absolute;
+  bottom: 0;
+  transform-origin: bottom center;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  pointer-events: none;
+  animation: tree-sway var(--sway-speed, 4s) ease-in-out infinite;
+  animation-delay: var(--sway-delay, 0s);
+}
+
+@keyframes tree-sway {
+  0%   { transform: rotate(0deg); }
+  20%  { transform: rotate(-1.2deg); }
+  50%  { transform: rotate(0deg); }
+  75%  { transform: rotate(0.8deg); }
+  100% { transform: rotate(0deg); }
 }
 
 /* Fog layer */
