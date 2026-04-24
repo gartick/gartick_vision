@@ -1,9 +1,13 @@
 /* ==========================================================
-   GARTICK VISION PLAZA — Animated Background Engine
+   JULIAN PLAZA — Animated Background Engine
    ========================================================== */
 
 (function () {
   'use strict';
+
+  var LOADER_DELAY    = 1500;
+  var TYPEWRITER_DELAY = 500;
+  var TYPEWRITER_SPEED = 40;
 
   // Generate stars
   function generateStars() {
@@ -63,7 +67,6 @@
       drop.style.left = Math.random() * 100 + '%';
       drop.style.setProperty('--rain-speed', (0.6 + Math.random() * 0.6) + 's');
       drop.style.setProperty('--rain-delay', Math.random() * 2 + 's');
-      drop.style.animationDelay = Math.random() * 2 + 's';
       container.appendChild(drop);
     }
   }
@@ -117,7 +120,7 @@
     const loader = document.getElementById('loader');
     if (!loader) return;
     window.addEventListener('load', () => {
-      setTimeout(() => loader.classList.add('done'), 1500);
+      setTimeout(() => loader.classList.add('done'), LOADER_DELAY);
     });
   }
 
@@ -160,10 +163,10 @@
         el.textContent = text.slice(0, i + 1);
         el.appendChild(cursor);
         i++;
-        setTimeout(type, 40);
+        setTimeout(type, TYPEWRITER_SPEED);
       }
     }
-    setTimeout(type, 500);
+    setTimeout(type, TYPEWRITER_DELAY);
   }
 
   // INIT
