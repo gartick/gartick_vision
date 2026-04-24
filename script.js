@@ -125,6 +125,9 @@
       { src: 'mountain.png',  left: 88,  vw: 36, opacity: 0.95 },
     ];
 
+    // Gunung terbesar di-render duluan = paling belakang (tapi tetap di depan shadow)
+    layout.sort(function(a, b) { return b.vw - a.vw; });
+
     layout.forEach(function(m) {
       var img = document.createElement('img');
       img.src = m.src;
