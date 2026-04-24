@@ -110,6 +110,7 @@
       img.alt = '';
       img.style.left = m.left + '%';
       img.style.width = m.vw + 'vw';
+      img.style.height = 'auto';
       img.style.opacity = String(m.opacity);
       container.appendChild(img);
     });
