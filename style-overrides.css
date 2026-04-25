@@ -5,6 +5,9 @@
    cascade akan menimpa rule-rule asli yang lebih lama.
    ============================================================ */
 
+/* Hujan dimatikan — animasi raindrops berat di mobile */
+.rain { display: none !important; }
+
 /* BG layer 1 jadi absolute height-limited (was: fixed inset:0) */
 .bg-container {
   position: absolute;
@@ -12,41 +15,52 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 130vh;
+  height: 110vh;
   z-index: -10;
   overflow: hidden;
   pointer-events: none;
 }
 
-/* Wide black blend transition antara bg-container & bg-pond */
+/* Transisi gradiasi gelap->terang dengan strip horizontal */
 .bg-transition {
   position: absolute;
-  top: 100vh;
+  top: 80vh;
   left: 0;
   width: 100%;
-  height: 90vh;
-  background: linear-gradient(
-    180deg,
-    transparent           0%,
-    rgba(0, 0, 0, 0.55)  18%,
-    #000                 38%,
-    #000                 62%,
-    rgba(0, 0, 0, 0.55)  82%,
-    transparent          100%
-  );
+  height: 60vh;
+  background:
+    /* strip horizontal supaya tidak mulus */
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.22) 0,
+      rgba(0, 0, 0, 0.22) 5px,
+      transparent 5px,
+      transparent 10px
+    ),
+    /* gradien utama: transparan -> hitam pekat -> biru tua -> transparan */
+    linear-gradient(
+      180deg,
+      transparent             0%,
+      rgba(0, 0, 0, 0.55)    15%,
+      #000                   35%,
+      #061a28                55%,
+      #0a3a55                75%,
+      rgba(20, 80, 120, 0.3) 92%,
+      transparent           100%
+    );
   z-index: -9;
   pointer-events: none;
 }
 
-/* Background kedua: mystical pond */
+/* Background kedua: mystical pond / sword in lake */
 .bg-pond {
   position: absolute;
-  top: 180vh;
+  top: 120vh;            /* lebih dekat dari 180vh supaya tampil di mobile */
   left: 0;
   width: 100%;
   bottom: 0;
   background-color: #051221;
-  background-image: url('tumblr_7e646d701b09619cbd7847b65ea580f0_01665962_1280.gif');
+  background-image: url('sword_in_lake.gif');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
@@ -55,13 +69,18 @@
   pointer-events: none;
 }
 
-/* Mobile: matikan fixed-attachment (iOS Safari fallback) */
+/* Mobile: matikan fixed-attachment (iOS Safari fallback) + posisi lebih dekat */
 @media (max-width: 768px) {
   .bg-pond {
+    top: 105vh;          /* di mobile lebih dekat lagi karena layar panjang */
     background-attachment: scroll;
     background-size: cover;
     background-position: center top;
     background-repeat: no-repeat;
+  }
+  .bg-transition {
+    top: 70vh;
+    height: 50vh;
   }
 }
 
@@ -72,8 +91,20 @@
   z-index: auto;
 }
 
+/* Rumput diperluas ke atas sampai menutupi area gunung (tetap di belakang) */
 .ground {
-  height: 22vh;
+  height: 60vh;
+  background:
+    linear-gradient(to bottom,
+      transparent             0%,
+      rgba(10, 30, 18, 0.20) 30%,
+      rgba(10, 30, 18, 0.55) 55%,
+      rgba(10, 25, 15, 0.82) 80%,
+      rgba(10, 25, 15, 0.95) 100%
+    ),
+    url('ground-texture.png');
+  background-size: auto, 128px 128px;
+  background-repeat: repeat-x, repeat;
   z-index: auto;
 }
 
