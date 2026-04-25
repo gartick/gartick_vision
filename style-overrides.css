@@ -24,10 +24,10 @@
 /* Transisi gradiasi gelap->terang dengan strip horizontal */
 .bg-transition {
   position: absolute;
-  top: 80vh;
+  top: 90vh;
   left: 0;
   width: 100%;
-  height: 60vh;
+  height: 110vh;
   background:
     /* strip horizontal supaya tidak mulus */
     repeating-linear-gradient(
@@ -41,46 +41,46 @@
     linear-gradient(
       180deg,
       transparent             0%,
-      rgba(0, 0, 0, 0.55)    15%,
-      #000                   35%,
-      #061a28                55%,
-      #0a3a55                75%,
-      rgba(20, 80, 120, 0.3) 92%,
+      rgba(0, 0, 0, 0.55)    12%,
+      #000                   28%,
+      #061a28                50%,
+      #0a3a55                72%,
+      rgba(20, 80, 120, 0.3) 90%,
       transparent           100%
     );
   z-index: -9;
   pointer-events: none;
 }
 
-/* Background kedua: mystical pond / sword in lake */
+/* Background kedua: mystical pond / sword in lake — diturunin & diperkecil */
 .bg-pond {
   position: absolute;
-  top: 120vh;            /* lebih dekat dari 180vh supaya tampil di mobile */
+  top: 200vh;
   left: 0;
   width: 100%;
   bottom: 0;
   background-color: #051221;
   background-image: url('sword_in_lake.gif');
-  background-size: cover;
-  background-position: center top;
+  background-size: 600px auto;          /* ukuran kecil tetap (tidak cover) */
+  background-position: center 8vh;
   background-repeat: no-repeat;
   background-attachment: fixed;
   z-index: -10;
   pointer-events: none;
 }
 
-/* Mobile: matikan fixed-attachment (iOS Safari fallback) + posisi lebih dekat */
+/* Mobile: matikan fixed-attachment + scale supaya muat layar */
 @media (max-width: 768px) {
   .bg-pond {
-    top: 105vh;          /* di mobile lebih dekat lagi karena layar panjang */
+    top: 200vh;
     background-attachment: scroll;
-    background-size: cover;
-    background-position: center top;
+    background-size: 92% auto;
+    background-position: center 12vh;
     background-repeat: no-repeat;
   }
   .bg-transition {
-    top: 70vh;
-    height: 50vh;
+    top: 80vh;
+    height: 100vh;
   }
 }
 
@@ -91,16 +91,20 @@
   z-index: auto;
 }
 
-/* Rumput diperluas ke atas sampai menutupi area gunung (tetap di belakang) */
+/* Mountain2 sprites diperbesar (scale dari sumbu bawah-tengah) */
+.mountain-sprite[src$="mountain2.png"] {
+  transform: scale(1.45);
+  transform-origin: bottom center;
+}
+
+/* Terrain diturunin (kembali ke height kecil, tidak menutupi gunung lagi) */
 .ground {
-  height: 60vh;
+  height: 22vh;
   background:
     linear-gradient(to bottom,
       transparent             0%,
-      rgba(10, 30, 18, 0.20) 30%,
-      rgba(10, 30, 18, 0.55) 55%,
-      rgba(10, 25, 15, 0.82) 80%,
-      rgba(10, 25, 15, 0.95) 100%
+      rgba(10, 30, 18, 0.72)  55%,
+      rgba(10, 25, 15, 0.92)  100%
     ),
     url('ground-texture.png');
   background-size: auto, 128px 128px;
